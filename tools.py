@@ -1,4 +1,4 @@
-from crewai_tools import YoutubChannelSearchTool
+from crewai_tools import YoutubeChannelSearchTool
 
 ## Initialize tool
-youtubeTool = YoutubChannelSearchTool(youtube_channel_handle = "@ThePrimeagen")
+youtubeTool = YoutubeChannelSearchTool(youtube_channel_handle='https://www.youtube.com/watch?v=qYNweeDHiyU')

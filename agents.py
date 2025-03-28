@@ -1,31 +1,43 @@
 from crewai import Agent
-from tools import youtubeTool
+from tools import yt_tool
 
-## Blog Researcher Agent
-researcher = Agent(
-    role = 'Blog Researcher from Youtube Videos',
-    goal = 'Get relevant video content for the topic {topic} from the Youtube Channel',
-    verbose = True,
-    memory = True,
-    backstory = (
-        "Expert in understanding videos in the field of AI, ML, Data Science and GenAI."
+from dotenv import load_dotenv
+
+load_dotenv()
+
+import os
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+os.environ["OPENAI_MODEL_NAME"]="gpt-4-0125-preview"
+
+
+## Create a senior blog content researcher
+
+blog_researcher=Agent(
+    role='Blog Researcher from Youtube Videos',
+    goal='get the relevant video transcription for the topic {topic} from the provided Yt channel',
+    verboe=True,
+    memory=True,
+    backstory=(
+       "Expert in understanding videos in AI Data Science , MAchine Learning And GEN AI and providing suggestion" 
     ),
-    tools = [youtubeTool],
-    allow_delegation = True
+    tools=[yt_tool],
+    allow_delegation=True
 )
 
-## Blog Writer Agent with YT tools
-writer = Agent(
-    role = 'Blog Writer',
-    goal = 'Narrate compelling stories about the video {topic} from Youtube channel',
-    verbose = True,
-    memory = True,
-    backstory = (
-    """With a flair for simplifying complex topics,
-    you craft engaging narratives that captivate and educate,
-    bringing new discoveries to light in an accessible way.
-    """
+## creating a senior blog writer agent with YT tool
+
+blog_writer=Agent(
+    role='Blog Writer',
+    goal='Narrate compelling tech stories about the video {topic} from YT video',
+    verbose=True,
+    memory=True,
+    backstory=(
+        "With a flair for simplifying complex topics, you craft"
+        "engaging narratives that captivate and educate, bringing new"
+        "discoveries to light in an accessible manner."
     ),
-    tools = [youtubeTool],
-    allow_delegation = False
+    tools=[yt_tool],
+    allow_delegation=False
+
+
 )

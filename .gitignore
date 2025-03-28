@@ -1,2 +1,4 @@
 /yt-blog-venv
 .env
+/db
+/__pycache__
